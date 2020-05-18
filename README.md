@@ -1,7 +1,8 @@
-gkcoi  
-![npm](https://img.shields.io/npm/v/gkcoi)
-[![License](https://img.shields.io/npm/l/express.svg)](https://github.com/Nishisonic/gkcoi/blob/master/LICENSE)
+node-gkcoi  
+[![License](https://img.shields.io/npm/l/express.svg)](https://github.com/Tibowl/gkcoi/blob/master/LICENSE)
 ====
+
+Generate KC organization images in node. Original by Nishisonic
 
 パラメータから艦これ編成画像をCanvas形式で出力します
 

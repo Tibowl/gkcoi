@@ -1,15 +1,11 @@
 {
-  "name": "gkcoi",
+  "name": "@tibowl/node-gkcoi",
   "version": "1.0.1",
-  "description": "Generate KanColle Organization Image",
+  "description": "Generate KanColle Organization Image in Node - original by Nishikuma",
   "main": "dist/index.js",
-  "module": "esm/index.js",
   "sideEffects": false,
   "scripts": {
-    "build": "npm run build:cjs && npm run build:esm",
-    "build:cjs": "tsc -p tsconfig.json",
-    "build:esm": "tsc -p tsconfig.esm.json",
-    "watch": "webpack -w"
+    "build": "tsc -p tsconfig.json"
   },
   "files": [
     "dist",
@@ -17,21 +13,22 @@
   ],
   "repository": {
     "type": "git",
-    "url": "git+https://github.com/Nishikuma/gkcoi.git"
+    "url": "git+https://github.com/Tibowl/node-gkcoi.git"
   },
   "keywords": [
     "kancolle"
   ],
-  "author": "Nishikuma",
+  "author": "Tibowl",
   "license": "MIT",
   "bugs": {
-    "url": "https://github.com/Nishisonic/gkcoi/issues"
+    "url": "https://github.com/Tibowl/node-gkcoi/issues"
   },
-  "homepage": "https://github.com/Nishisonic/gkcoi#readme",
+  "homepage": "https://github.com/Tibowl/node-gkcoi#readme",
   "devDependencies": {
     "@types/chart.js": "^2.9.20",
     "@types/chartjs-plugin-colorschemes": "^0.4.0",
     "@types/node": "^14.0.1",
+    "@types/node-fetch": "^2.5.7",
     "@typescript-eslint/eslint-plugin": "^2.33.0",
     "@typescript-eslint/parser": "^2.33.0",
     "eslint": "^7.0.0",
@@ -45,8 +42,10 @@
     "webpack-cli": "^3.3.11"
   },
   "dependencies": {
+    "canvas": "^2.6.1",
     "chart.js": "^2.9.3",
     "chartjs-plugin-colorschemes": "^0.4.0",
-    "chartjs-plugin-labels": "^1.1.0"
+    "chartjs-plugin-labels": "^1.1.0",
+    "node-fetch": "^2.6.0"
   }
 }

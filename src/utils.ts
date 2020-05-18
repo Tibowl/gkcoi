@@ -1,6 +1,7 @@
 import { createCanvas2D, Canvas, Image } from "./canvas";
 import { Ship, Item, AirState, AirPower, MasterData } from "./type";
 import { Lang } from "./lang";
+import fetch from "node-fetch";
 
 export const MASTER_URL =
   "https://raw.githubusercontent.com/Nishisonic/gkcoi/master/static";

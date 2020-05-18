@@ -1,19 +1,20 @@
-export type Canvas = HTMLCanvasElement;
-export type Image = HTMLImageElement;
+import {
+  createCanvas,
+  Canvas as ccanvas,
+  Image as cimage,
+  CanvasRenderingContext2D as crc2d,
+  loadImage,
+} from "canvas";
 
-export const createCanvas = (width: number, height: number): Canvas => {
-  const canvas = Object.assign(document.createElement("canvas"), {
-    width,
-    height,
-  });
+export type Image = cimage;
+export type Canvas = ccanvas;
 
-  return canvas;
-};
+export { createCanvas };
 
 export const createCanvas2D = (
   width: number,
   height: number
-): { canvas: Canvas; ctx: CanvasRenderingContext2D } => {
+): { canvas: Canvas; ctx: crc2d } => {
   const canvas = createCanvas(width, height);
   const ctx = canvas.getContext("2d");
 
@@ -25,24 +26,5 @@ export const createCanvas2D = (
 };
 
 export const fetchImage = async (src: string): Promise<Image> => {
-  return new Promise((resolve, reject) => {
-    const image = document.createElement("img");
-    image.crossOrigin = "Anonymous";
-
-    const cleanup = (): void => {
-      image.onload = null;
-      image.onerror = null;
-    };
-
-    image.onload = (): void => {
-      cleanup();
-      resolve(image);
-    };
-    image.onerror = (): void => {
-      cleanup();
-      reject(new Error('Failed to load the image "' + src + '"'));
-    };
-
-    image.src = src;
-  });
+  return loadImage(src);
 };
