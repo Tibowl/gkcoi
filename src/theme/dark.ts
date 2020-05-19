@@ -502,7 +502,7 @@ export async function generateDarkParameterCanvasAsync(
           formatter: (value: number, context): string =>
             (context.chart.data.labels as string[])[context.dataIndex] !==
             NONE[lang]
-              ? `${value.toFixed(0)}%`
+              ? `${(value * 100).toFixed(0)}%`
               : "",
         },
         colorschemes: {
@@ -551,7 +551,7 @@ export async function generateDarkParameterCanvasAsync(
           formatter: (value: number, context): string =>
             (context.chart.data.labels as string[])[context.dataIndex] !==
             NONE[lang]
-              ? `${value.toFixed(0)}%`
+              ? `${(value * 100).toFixed(0)}%`
               : "",
         },
         colorschemes: {
