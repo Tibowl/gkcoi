@@ -36,7 +36,7 @@ export async function generate(
   }
 ): Promise<Canvas> {
   const start2: MasterData =
-    options.start2Data ?? (await fetchStart2(options.start2URL));
+    options.start2Data || (await fetchStart2(options.start2URL));
   const { lang, theme, hqlv, fleets, airbases, airState, comment } = parse(
     deckbuilder,
     start2,

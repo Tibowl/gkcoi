@@ -477,9 +477,9 @@ interface MasterItem {
   api_rare: number;
   api_broken: number[];
   api_usebull: string;
-  api_version: number;
-  api_distance: number;
-  api_cost: number;
+  api_version?: number;
+  api_distance?: number;
+  api_cost?: number;
 }
 
 interface FormatData {
