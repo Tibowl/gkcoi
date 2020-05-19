@@ -11,9 +11,7 @@ export async function fetchStart2(url: string): Promise<MasterData> {
   return res.json();
 }
 
-export async function fetchLangData(
-  lang: Lang
-): Promise<{
+type LanguageData = {
   ships: {
     [key: string]:
       | string
@@ -27,7 +25,13 @@ export async function fetchLangData(
   items: {
     [key: string]: string;
   };
-}> {
+};
+const LangCache: { [key in Lang]?: LanguageData } = {};
+
+export async function fetchLangData(lang: Lang): Promise<LanguageData> {
+  const cached = LangCache[lang];
+  if (cached !== undefined) return cached;
+
   const URL =
     "https://raw.githubusercontent.com/KC3Kai/kc3-translations/master/data";
   const shipsUrl = `${URL}/${lang}/ships.json`;
@@ -36,7 +40,9 @@ export async function fetchLangData(
   const ships = await fetch(shipsUrl).then((res) => res.json());
   const shipAffix = await fetch(shipAffixUrl).then((res) => res.json());
   const items = await fetch(itemsUrl).then((res) => res.json());
-  return { ships: Object.assign(ships, shipAffix), items };
+  const obj = { ships: Object.assign(ships, shipAffix), items };
+  LangCache[lang] = obj;
+  return obj;
 }
 
 export function toTranslateShipName(
