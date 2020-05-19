@@ -1,14 +1,14 @@
 dependencies:
-  '@types/fs-extra': 9.0.0
   canvas: 2.6.1
   chart.js: 2.9.3
   chartjs-plugin-colorschemes: 0.4.0_chart.js@2.9.3
-  chartjs-plugin-labels: 1.1.0_chart.js@2.9.3
+  chartjs-plugin-datalabels: 0.7.0_chart.js@2.9.3
   fs-extra: 9.0.0
   node-fetch: 2.6.0
 devDependencies:
   '@types/chart.js': 2.9.20
   '@types/chartjs-plugin-colorschemes': 0.4.0
+  '@types/fs-extra': 9.0.1
   '@types/node': 14.0.1
   '@types/node-fetch': 2.5.7
   '@typescript-eslint/eslint-plugin': 2.34.0_d88701cb3afea3dfd694e8456ddba8b7
@@ -62,12 +62,12 @@ packages:
     dev: true
     resolution:
       integrity: sha512-OCutwjDZ4aFS6PB1UZ988C4YgwlBHJd6wCeQqaLdmadZ/7e+w79+hbMUFC1QXDNCmdyoRfAFdm0RypzwR+Qpag==
-  /@types/fs-extra/9.0.0:
+  /@types/fs-extra/9.0.1:
     dependencies:
-      '@types/node': 14.0.1
-    dev: false
+      '@types/node': 14.0.3
+    dev: true
     resolution:
-      integrity: sha512-xCbDUSZArlmMjiJdczt8AFNH2MwcMb/pj/HKja1hx3u1qzOUINcJktQMGoGVlgFnzxnuCahxKFlcRBkSAcm33g==
+      integrity: sha512-B42Sxuaz09MhC3DDeW5kubRcQ5by4iuVQ0cRRWM2lggLzAa/KVom0Aft/208NgMvNQQZ86s5rVcqDdn/SH0/mg==
   /@types/json-schema/7.0.4:
     dev: true
     resolution:
@@ -80,8 +80,13 @@ packages:
     resolution:
       integrity: sha512-o2WVNf5UhWRkxlf6eq+jMZDu7kjgpgJfl4xVNlvryc95O/6F2ld8ztKX+qu+Rjyet93WAWm5LjeX9H5FGkODvw==
   /@types/node/14.0.1:
+    dev: true
     resolution:
       integrity: sha512-FAYBGwC+W6F9+huFIDtn43cpy7+SzG+atzRiTfdp3inUKL2hXnd4rG8hylJLIh4+hqrQy1P17kvJByE/z825hA==
+  /@types/node/14.0.3:
+    dev: true
+    resolution:
+      integrity: sha512-a8TR2N5VEJCL9HEJrAfwv3UI1bZq50HydowDDVV6pfnY7ZwG5Pjii+nSDhrDtGW3XKMoVKOgG8zS/Kv5j399uA==
   /@typescript-eslint/eslint-plugin/2.34.0_d88701cb3afea3dfd694e8456ddba8b7:
     dependencies:
       '@typescript-eslint/experimental-utils': 2.34.0_eslint@7.0.0+typescript@3.9.2
@@ -784,14 +789,14 @@ packages:
       chart.js: '>= 2.5.0 < 3'
     resolution:
       integrity: sha512-GUAulGFa6igdhi/xF9XopLJknwtXZT0wwEB+e/D4SJcRGY1HdwzX84pVn5BSpnk1idF6RJxZoA7w396R7BOE9A==
-  /chartjs-plugin-labels/1.1.0_chart.js@2.9.3:
+  /chartjs-plugin-datalabels/0.7.0_chart.js@2.9.3:
     dependencies:
       chart.js: 2.9.3
     dev: false
     peerDependencies:
-      chart.js: ^2.6.0
+      chart.js: '>= 2.7.0 < 3'
     resolution:
-      integrity: sha512-ab1oiQT7oMnpYDn6h8biL7VZM0qIxtwfhQw1+qH7xe7Ia6lBKX/ks5rEhgI6CZ4PlRRgDFGK9Mf/T2SO9l+NCA==
+      integrity: sha512-PKVUX14nYhH0wcdCpgOoC39Gbzvn6cZ7O9n+bwc02yKD9FTnJ7/TSrBcfebmolFZp1Rcicr9xbT0a5HUbigS7g==
   /chokidar/2.1.8:
     dependencies:
       anymatch: 2.0.0
@@ -4102,7 +4107,7 @@ packages:
 specifiers:
   '@types/chart.js': ^2.9.20
   '@types/chartjs-plugin-colorschemes': ^0.4.0
-  '@types/fs-extra': ^9.0.0
+  '@types/fs-extra': ^9.0.1
   '@types/node': ^14.0.1
   '@types/node-fetch': ^2.5.7
   '@typescript-eslint/eslint-plugin': ^2.33.0
@@ -4110,7 +4115,7 @@ specifiers:
   canvas: ^2.6.1
   chart.js: ^2.9.3
   chartjs-plugin-colorschemes: ^0.4.0
-  chartjs-plugin-labels: ^1.1.0
+  chartjs-plugin-datalabels: ^0.7.0
   eslint: ^7.0.0
   eslint-config-prettier: ^6.11.0
   eslint-plugin-prettier: ^3.1.3

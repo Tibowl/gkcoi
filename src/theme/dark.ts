@@ -20,7 +20,7 @@ import {
   Item,
 } from "../type";
 import Chart from "chart.js";
-import "chartjs-plugin-labels";
+import "chartjs-plugin-datalabels";
 import "chartjs-plugin-colorschemes";
 import {
   NONE,
@@ -461,7 +461,7 @@ export async function generateDarkParameterCanvasAsync(
   ctx.font = "bold 16px Meiryo";
   ctx.textAlign = "center";
   ctx.fillStyle = "#fff";
-  ctx.fillText("Details(Combined Fleet)", 132, 24);
+  ctx.fillText("Details", 132, 24);
   ctx.fillText(CONTACT.LABEL[lang], 85, 125);
   ctx.fillText(`(${CONTACT[airState][lang]})`, 85, 146);
   ctx.fillText(AA_CI[lang], 85, 318);
@@ -491,14 +491,19 @@ export async function generateDarkParameterCanvasAsync(
         },
       },
       plugins: {
-        labels: {
-          render: "percentage",
-          fontSize: 14,
-          fontColor: "black",
-          fontStyle: "bold",
-        },
         datalabels: {
-          formatter: (): string => "",
+          font: {
+            size: 14,
+            weight: "bold",
+          },
+          textStrokeColor: "white",
+          textStrokeWidth: 2,
+          color: "black",
+          formatter: (value: number, context): string =>
+            (context.chart.data.labels as string[])[context.dataIndex] !==
+            NONE[lang]
+              ? `${value.toFixed(0)}%`
+              : "",
         },
         colorschemes: {
           scheme: "tableau.ClassicMedium10",
@@ -535,16 +540,19 @@ export async function generateDarkParameterCanvasAsync(
         },
       },
       plugins: {
-        labels: {
-          fontSize: 14,
-          fontColor: "black",
-          fontStyle: "bold",
-          render: (args: {
-            value: number;
-            label: string;
-            percentage: number;
-          }): string =>
-            args.label !== NONE[lang] ? `${args.percentage}%` : "",
+        datalabels: {
+          font: {
+            size: 14,
+            weight: "bold",
+          },
+          textStrokeColor: "white",
+          textStrokeWidth: 2,
+          color: "black",
+          formatter: (value: number, context): string =>
+            (context.chart.data.labels as string[])[context.dataIndex] !==
+            NONE[lang]
+              ? `${value.toFixed(0)}%`
+              : "",
         },
         colorschemes: {
           scheme: "tableau.ClassicMedium10",
