@@ -2,184 +2,79 @@ node-gkcoi
 [![License](https://img.shields.io/npm/l/express.svg)](https://github.com/Tibowl/gkcoi/blob/master/LICENSE)
 ====
 
-Generate KC organization images in node. Original by Nishisonic
+Generate KC organization images in Node.js. [Originally](https://github.com/Nishisonic/gkcoi) developed by Nishisonic for web canvas.
 
-パラメータから艦これ編成画像をCanvas形式で出力します
+Exports Deckbuilder format fleets into an image.
 
 ![](https://i.imgur.com/1edg6hX.png)
+* There might be some visual differences due to changes
 
 ## Description
 
-[七四式電子観測儀(ElectronicObserver)](https://github.com/andanteyk/ElectronicObserver)で作られた編成画像をWeb上でも再現可能にするライブラリです  
-また、オリジナル版(Dark ver. 上図参照)も提供します
+Allows you to create [ElectronicObserver](https://github.com/andanteyk/ElectronicObserver) style fleet images on server-side.
+Also includes dark theme.
 
-※多言語対応(日本語・English・한국어・中文(簡体))
-
-## Requirement
-
-- [Chart.js](https://github.com/chartjs/Chart.js)
-- [chartjs-plugin-labels](https://github.com/emn178/chartjs-plugin-labels)
-- [chartjs-plugin-colorschemes](https://github.com/nagix/chartjs-plugin-colorschemes)
-
-Dark ver.&連合艦隊&基地航空隊使用時のみ使用  
-ドーナツ円グラフの表示に使用します
+Supports Japanese, English, Korean and Chinese (Simplified)
 
 ## Usage
 
 ``` JS
-import { generate } from "gkcoi";
+import { generate } from "@tibowl/node-gkcoi";
 
 // DeckBuilder
 const deck = {
-  lang: "en",
-  theme: "dark",
   hqlv: 120,
-  f1: {
+  theme: "dark",
+  lang: "en",
+  f1 = {
     s1: {
-      id: 548,
-      lv: 133,
+      id: 463,
+      lv: 175,
       hp: 38,
-      fp: 64,
-      tp: 90,
-      aa: 65,
-      ar: 53,
-      asw: 129,
-      ev: 106,
-      los: 55,
-      luck: 21,
+      fp: 71,
+      tp: 118,
+      ar: 55,
+      aa: 70,
+      asw: 108,
+      ev: 127,
+      los: 94,
+      luck: 62,
       items: {
-        i1: { id: 262, rf: 0, mas: 0 },
-        i2: { id: 261, rf: 0, mas: 0 },
-        i3: { id: 288, rf: 0, mas: 0 },
-        i4: { id: 173, rf: 0, mas: 0 },
+        i1: { id: 122, rf: 10 },
+        i2: { id: 122, rf: 10 },
+        i3: { id: 106 },
+        i4: { id: 173, rf: 4 },
       },
     },
   },
 };
 
-generate(deck); // Promise<Canvas>
+const output = await generate(deck); // returns node-canvas Canvas
+
+await writeFile("deck.png", output.toBuffer());
 ```
 
-![](https://i.imgur.com/Sgj2SVz.png)
+![](https://i.imgur.com/30bjM0H.png)
 
 ## Format
 
-?は無くても動く部分
+Refer to [original gkcoi documentation](https://github.com/Nishisonic/gkcoi#deckbuilder).
 
-### deckbuilder
+### Differences
 
-```
-{
-  /**
-   * 言語
-   * jp=日本語(default)
-   * en=英語
-   * kr=韓国語
-   * scn=中国語
-   */
-  lang?: "jp" | "en" | "kr" | "scn";
-  /**
-   * テーマ
-   * dark=オリジナル(default)
-   * 74lc=七四式(大型)
-   * 74mc=七四式(中型)
-   * 74sb=七四式(小型)
-   */
-  theme?: "dark" | "74lc" | "74mc" | "74sb";
-  /** 司令部Lv(default=120) */
-  hqlv?: number;
-  /** 艦隊 */
-  f1~f4?: {
-    /** 艦隊名(七四式のときのみ表示) */
-    name?: string;
-    /** 艦娘 */
-    s1~s7?: {
-        /** 艦ID */
-        id: number;
-        /** レベル */
-        lv: number;
-        /** 装備 */
-        items: {
-          i1~ix?: {
-              /** 装備ID*/
-              id: number;
-              /** 改修 */
-              rf: number;
-              /** 熟練度 */
-              mas: number;
-          };
-        };
-        /** 耐久 */
-        hp: number;
-        /** 火力 */
-        fp: number;
-        /** 雷装 */
-        tp: number;
-        /** 対空 */
-        aa: number;
-        /** 装甲 */
-        ar: number;
-        /** 対潜 */
-        asw: number;
-        /** 回避 */
-        ev: number;
-        /** 索敵 */
-        los: number;
-        /** 運 */
-        luck: number;
-    }
-  }
-  /** 基地航空隊 */
-  a1~a3?: {
-    /** 基地状態(使わない) */
-    mode?: number;
-    /** 装備 */
-    items: {
-      i1~i4?: {
-          /** 装備ID*/
-          id: number;
-          /** 改修 */
-          rf: number;
-          /** 熟練度 */
-          mas: number;
-      };
-    }
-  }
-  /**
-   * チャート表示
-   * オリジナル(dark)&基地航空隊使用&複数艦隊表示時のみ
-   * as+ = 制空権確保(default)
-   * as  = 航空優勢
-   * ap  = 航空劣勢
-   */
-  as?: AirState;
-  /**
-   * コメント表示
-   * オリジナル(dark)&基地航空隊使用&複数艦隊表示時のみ
-   * 改行は\n
-   */
-  cmt?: string;
-}
-```
+Also comes with a `configure` function to set cache directory. This is to reduce HTTP requests on server-side.
+If you already have api_start2 data within your application, it can be passed through via `generate(..., { start2Data })`.
 
-### options
+## Examples
 
-この引数を指定すると、画像・マスターデータ取得先をデフォルトから変えることができます  
-これにより、ライブラリの更新が遅れたとしても独自で更新することが可能になります
-
-* start2URL(マスターデータ)
-  * デフォルト:https://raw.githubusercontent.com/Nishisonic/gkcoi/master/static/START2.json
-
-設定する場合はファイルを直指定してください
-
-* shipURL(艦娘画像)
-  * デフォルト:https://raw.githubusercontent.com/Nishisonic/gkcoi/master/static/ship
-
-設定する場合は途中まで指定  
-その先はライブラリが``` `${shipURL}/card/1.png` ```等といった形で取得します
+See [./test/index.ts](https://github.com/Tibowl/node-gkcoi/blob/master/test/index.ts) for a small example. Asashio's [randomfleet.ts](https://github.com/Tibowl/Asashio/blob/master/src/commands/tools/randomfleet.ts) is a larger use-case, includes setting up cache, converting TsunDB format and passes own api_start2 data.
 
 ## Install
-
+Fork, for use in node.js
+``` shell
+$ npm install @tibowl/node-gkcoi
+```
+Original, for use on web
 ``` shell
 $ npm install gkcoi
 ```
@@ -193,9 +88,9 @@ $ npm install gkcoi
   - ドーナツ円グラフの表示に使用
   - [MIT License](https://github.com/chartjs/Chart.js/blob/master/LICENSE.md)
 
-- chartjs-plugin-labels
+- chartjs-plugin-datalabels
   - ドーナツ円グラフの表示に使用
-  - [MIT License](https://github.com/emn178/chartjs-plugin-labels/blob/master/LICENSE.txt)
+  - [MIT License](https://github.com/chartjs/chartjs-plugin-datalabels/blob/master/LICENSE.md)
 
 - chartjs-plugin-colorschemes
   - ドーナツ円グラフの表示に使用
