@@ -724,7 +724,7 @@ export function parse(
     );
   }
 
-  const lang: Lang = deckbuilder.lang || "ja";
+  const lang: Lang = deckbuilder.lang || "jp";
   const theme = deckbuilder.theme || "dark";
   const hqlv = deckbuilder.hqlv || 120;
   const airState = deckbuilder.as || "AS+";

@@ -1,8 +1,10 @@
 dependencies:
+  '@types/fs-extra': 9.0.0
   canvas: 2.6.1
   chart.js: 2.9.3
   chartjs-plugin-colorschemes: 0.4.0_chart.js@2.9.3
   chartjs-plugin-labels: 1.1.0_chart.js@2.9.3
+  fs-extra: 9.0.0
   node-fetch: 2.6.0
 devDependencies:
   '@types/chart.js': 2.9.20
@@ -60,6 +62,12 @@ packages:
     dev: true
     resolution:
       integrity: sha512-OCutwjDZ4aFS6PB1UZ988C4YgwlBHJd6wCeQqaLdmadZ/7e+w79+hbMUFC1QXDNCmdyoRfAFdm0RypzwR+Qpag==
+  /@types/fs-extra/9.0.0:
+    dependencies:
+      '@types/node': 14.0.1
+    dev: false
+    resolution:
+      integrity: sha512-xCbDUSZArlmMjiJdczt8AFNH2MwcMb/pj/HKja1hx3u1qzOUINcJktQMGoGVlgFnzxnuCahxKFlcRBkSAcm33g==
   /@types/json-schema/7.0.4:
     dev: true
     resolution:
@@ -72,7 +80,6 @@ packages:
     resolution:
       integrity: sha512-o2WVNf5UhWRkxlf6eq+jMZDu7kjgpgJfl4xVNlvryc95O/6F2ld8ztKX+qu+Rjyet93WAWm5LjeX9H5FGkODvw==
   /@types/node/14.0.1:
-    dev: true
     resolution:
       integrity: sha512-FAYBGwC+W6F9+huFIDtn43cpy7+SzG+atzRiTfdp3inUKL2hXnd4rG8hylJLIh4+hqrQy1P17kvJByE/z825hA==
   /@typescript-eslint/eslint-plugin/2.34.0_d88701cb3afea3dfd694e8456ddba8b7:
@@ -477,6 +484,12 @@ packages:
     dev: true
     resolution:
       integrity: sha1-x57Zf380y48robyXkLzDZkdLS3k=
+  /at-least-node/1.0.0:
+    dev: false
+    engines:
+      node: '>= 4.0.0'
+    resolution:
+      integrity: sha512-+q/t7Ekv1EDY2l6Gda6LLiX14rU9TV20Wa3ofeQmwPFZbOMo9DXrLbOjFaaclkXKWidIaopwAObQDqwWtGUjqg==
   /atob/2.1.2:
     dev: true
     engines:
@@ -1629,6 +1642,17 @@ packages:
     dev: true
     resolution:
       integrity: sha1-i/tVAr3kpNNs/e6gB/zKIdfjgq8=
+  /fs-extra/9.0.0:
+    dependencies:
+      at-least-node: 1.0.0
+      graceful-fs: 4.2.4
+      jsonfile: 6.0.1
+      universalify: 1.0.0
+    dev: false
+    engines:
+      node: '>=10'
+    resolution:
+      integrity: sha512-pmEYSk3vYsG/bF651KPUXZ+hvjpgWYw/Gc7W9NFUe3ZVLczKKWIij3IKpOrQcdw4TILtibFslZ0UmR8Vvzig4g==
   /fs-minipass/1.2.7:
     dependencies:
       minipass: 2.9.0
@@ -1788,7 +1812,6 @@ packages:
     resolution:
       integrity: sha512-BWICuzzDvDoH54NHKCseDanAhE3CeDorgDL5MT6LMXXj2WCnd9UC2szdk4AWLfjdgNBCXLUanXYcpBBKOSWGwg==
   /graceful-fs/4.2.4:
-    dev: true
     resolution:
       integrity: sha512-WjKPNJF79dtJAVniUlGGWHYGz2jWxT6VhN/4m1NdkbZ2nOsEF+cI1Edgql5zCRhs/VsQYRvrXctxktVXZUkixw==
   /has-flag/3.0.0:
@@ -2210,6 +2233,14 @@ packages:
     hasBin: true
     resolution:
       integrity: sha512-aKS4WQjPenRxiQsC93MNfjx+nbF4PAdYzmd/1JIj8HYzqfbu86beTuNgXDzPknWk0n0uARlyewZo4s++ES36Ow==
+  /jsonfile/6.0.1:
+    dependencies:
+      universalify: 1.0.0
+    dev: false
+    optionalDependencies:
+      graceful-fs: 4.2.4
+    resolution:
+      integrity: sha512-jR2b5v7d2vIOust+w3wtFKZIfpC2pnRmFAhAC/BuweZFQR8qZzxH1OyrQ10HmdVYiXWkYUqPVsz91cG7EL2FBg==
   /kind-of/3.2.2:
     dependencies:
       is-buffer: 1.1.6
@@ -3813,6 +3844,12 @@ packages:
     dev: true
     resolution:
       integrity: sha512-zoWr9ObaxALD3DOPfjPSqxt4fnZiWblxHIgeWqW8x7UqDzEtHEQLzji2cuJYQFCU6KmoJikOYAZlrTHHebjx2w==
+  /universalify/1.0.0:
+    dev: false
+    engines:
+      node: '>= 10.0.0'
+    resolution:
+      integrity: sha512-rb6X1W158d7pRQBg5gkR8uPaSfiids68LTJQYOtEUhoJUWBdaQHsuT/EUduxXYxcrt4r5PJ4fuHW1MHT6p0qug==
   /unset-value/1.0.0:
     dependencies:
       has-value: 0.3.1
@@ -4065,6 +4102,7 @@ packages:
 specifiers:
   '@types/chart.js': ^2.9.20
   '@types/chartjs-plugin-colorschemes': ^0.4.0
+  '@types/fs-extra': ^9.0.0
   '@types/node': ^14.0.1
   '@types/node-fetch': ^2.5.7
   '@typescript-eslint/eslint-plugin': ^2.33.0
@@ -4076,6 +4114,7 @@ specifiers:
   eslint: ^7.0.0
   eslint-config-prettier: ^6.11.0
   eslint-plugin-prettier: ^3.1.3
+  fs-extra: ^9.0.0
   node-fetch: ^2.6.0
   prettier: ^2.0.5
   ts-loader: ^7.0.4

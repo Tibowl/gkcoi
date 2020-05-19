@@ -5,6 +5,11 @@ import {
   CanvasRenderingContext2D as crc2d,
   loadImage,
 } from "canvas";
+import { join } from "path";
+import { ensureDir, readFile, writeFile } from "fs-extra";
+import fetch from "node-fetch";
+
+import { MASTER_URL } from "./utils";
 
 export type Image = cimage;
 export type Canvas = ccanvas;
@@ -25,6 +30,24 @@ export const createCanvas2D = (
   return { canvas, ctx };
 };
 
+let cacheDir: string | undefined = undefined;
+export function setCacheDir(dir: string): void {
+  cacheDir = dir;
+}
+
 export const fetchImage = async (src: string): Promise<Image> => {
+  if (cacheDir && /^https?:/.test(src)) {
+    const img = src.replace(MASTER_URL, "").replace("://", "/");
+    const path = join(cacheDir, img);
+    try {
+      return loadImage(await readFile(path));
+    } catch (error) {
+      const out = await (await fetch(src)).buffer();
+      await ensureDir(join(path, ".."));
+      await writeFile(path, out);
+      return loadImage(out);
+    }
+  }
+
   return loadImage(src);
 };

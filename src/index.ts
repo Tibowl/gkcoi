@@ -8,7 +8,7 @@ import { getLoSValue, fetchStart2, MASTER_URL } from "./utils";
 import { generate74eoLargeCardFleetCanvasAsync } from "./theme/74eoLC";
 import { generate74eoMediumCutinFleetCanvasAsync } from "./theme/74eoMC";
 import { generate74eoSmallBannerFleetCanvasAsync } from "./theme/74eoSB";
-import { Canvas, createCanvas2D } from "./canvas";
+import { Canvas, createCanvas2D, setCacheDir } from "./canvas";
 import { stick } from "./stick";
 
 export {
@@ -19,6 +19,10 @@ export {
   DeckBuilderAirbase,
 } from "./type";
 
+export function configure(options: { cacheDir?: string }): void {
+  if (options.cacheDir) setCacheDir(options.cacheDir);
+}
+
 /**
  * 画像を生成する
  * @param deckbuilder フォーマット
@@ -27,20 +31,18 @@ export {
 export async function generate(
   deckbuilder: DeckBuilder,
   options: {
-    start2URL: string;
-    shipURL: string;
+    start2URL?: string;
+    shipURL?: string;
     start2Data?: MasterData;
-  } = {
-    start2URL: `${MASTER_URL}/START2.json`,
-    shipURL: `${MASTER_URL}/ship`,
-  }
+  } = {}
 ): Promise<Canvas> {
   const start2: MasterData =
-    options.start2Data || (await fetchStart2(options.start2URL));
+    options.start2Data ||
+    (await fetchStart2(options.start2URL || `${MASTER_URL}/START2.json`));
   const { lang, theme, hqlv, fleets, airbases, airState, comment } = parse(
     deckbuilder,
     start2,
-    options.shipURL
+    options.shipURL || `${MASTER_URL}/ship`
   );
   const has5slot = fleets.some(({ ships }) =>
     ships.some((ship) => ship.slotNum === 5)
