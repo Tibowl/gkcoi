@@ -36,6 +36,14 @@ import { Theme } from "../src/type";
     theme: "dark",
     lang: "en",
     f1: { ...f1 },
+
+    /*a1: {
+      items: {
+        i1: {
+          id: 278,
+        },
+      },
+    },*/
   };
 
   const deckCF: DeckBuilder = {
