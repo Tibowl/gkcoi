@@ -29,12 +29,14 @@ export async function generate(
   options: {
     start2URL: string;
     shipURL: string;
+    start2Data?: MasterData;
   } = {
     start2URL: `${MASTER_URL}/START2.json`,
     shipURL: `${MASTER_URL}/ship`,
   }
 ): Promise<Canvas> {
-  const start2: MasterData = await fetchStart2(options.start2URL);
+  const start2: MasterData =
+    options.start2Data ?? (await fetchStart2(options.start2URL));
   const { lang, theme, hqlv, fleets, airbases, airState, comment } = parse(
     deckbuilder,
     start2,
