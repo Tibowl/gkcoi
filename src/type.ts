@@ -701,10 +701,10 @@ export function parse(
     ].map((item) => parseItem(item));
     return new Ship(
       id,
-      masterShip[id].api_name,
-      masterShip[id].api_yomi,
-      masterShip[id].api_stype,
-      masterShip[id].api_ctype,
+      masterShip[id]?.api_name || "??",
+      masterShip[id]?.api_yomi || "??",
+      masterShip[id]?.api_stype || 0,
+      masterShip[id]?.api_ctype || 0,
       lv,
       hp,
       firepower,
@@ -715,10 +715,10 @@ export function parse(
       evasion,
       los,
       luck,
-      masterShip[id].api_slot_num,
-      masterShip[id].api_leng,
-      masterShip[id].api_soku,
-      masterShip[id].api_maxeq,
+      masterShip[id]?.api_slot_num || items.length - 1,
+      masterShip[id]?.api_leng || 0,
+      masterShip[id]?.api_soku || 0,
+      masterShip[id]?.api_maxeq || new Array(items.length).fill(0),
       items,
       url
     );

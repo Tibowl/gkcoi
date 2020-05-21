@@ -42,7 +42,12 @@ export const fetchImage = async (src: string): Promise<Image> => {
     try {
       return loadImage(await readFile(path));
     } catch (error) {
-      const out = await (await fetch(src)).buffer();
+      const fetching = await fetch(src);
+      if (fetching.status >= 400)
+        return loadImage(
+          "data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7"
+        );
+      const out = await fetching.buffer();
       await ensureDir(join(path, ".."));
       await writeFile(path, out);
       return loadImage(out);
